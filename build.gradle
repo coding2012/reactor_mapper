@@ -1,0 +1,43 @@
+ext {
+    groovyVersion = '2.3'
+    slf4jVersion = '1.7.7'
+    logbackVersion = '1.1.2'
+    reactorVersion = '1.1.2.RELEASE'
+}
+
+buildscript {
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+
+repositories {
+    mavenLocal()
+    maven { url 'http://repo.springsource.org/libs-release' }
+    maven { url 'http://repo.springsource.org/libs-milestone' }
+    maven { url 'http://repo.springsource.org/libs-snapshot' }
+    mavenCentral()
+}
+
+project.sourceCompatibility = 1.8
+project.targetCompatibility = 1.8
+
+dependencies {
+    // Groovy
+    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
+    runtime 'org.slf4j:slf4j-simple:1.7.7'
+
+    // Reactor
+    compile "org.projectreactor:reactor-groovy:$reactorVersion"
+    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
+
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
+
+
